@@ -1,7 +1,7 @@
 var c = document.getElementById("gameScreen");
 var ctx = c.getContext("2d");
 ctx.fillStyle = "black";
-ctx.lineWidth = 10;
+ctx.lineWidth = 5;
 ctx.font = "20px Roboto";
 
 let mX;//mouse x pos
@@ -50,26 +50,28 @@ function Draw(something)
       alert("hmm, något gick fel");
       break;
   }
-    function DrawBattery(mX, mY) //!can add 3rd arg to change the voltage
-    {
-      ctx.fillStyle = "black";
-      
-      ctx.fillRect(mX - 10, mY, 6, 30);
-      ctx.fillRect((mX + 10), (mY - 14), 4, 60);
-      //draw text elements
-      let connectMinus = mX - 20; // platsen vid minuspolen där andra saker kan anslutas
-      let connectPlus = mX + 30; // samma för pluspolen
-      return connectPlus, connectMinus;
-      
-    }
+}
+
+function DrawBattery(mX, mY) //!can add 3rd arg to change the voltage
+{
+  ctx.fillStyle = "black";
+  
+  ctx.fillRect(mX - 10, mY, 6, 30);
+  ctx.fillRect((mX + 10), (mY - 14), 4, 60);
+  //draw text elements
+  let connectMinus = mX - 20; // platsen vid minuspolen där andra saker kan anslutas
+  let connectPlus = mX + 30; // samma för pluspolen
+  return connectPlus, connectMinus;
+  
+}
     
 function DrawResistor(mX, mY)
 {
-      ctx.fillText("Hello World!", mX, mY);
-      ctx.fillStyle = "black";
+  ctx.fillText("Hello World!", mX, mY);
+  ctx.fillStyle = "black";
       
-      //jag skulle vilja att den kan roteras
-      let width = 90;
+  //jag skulle vilja att den kan roteras
+  let width = 90;
   let height = 30;
   let insideOffset = width * 0.05;
   ctx.strokeRect((mX- width/2), mY, width, height);
@@ -80,6 +82,7 @@ function DrawResistor(mX, mY)
   return connectPlus, connectMinus;
   
 }
+
 function DrawAmpmeter(mX, mY)
 {
   ctx.fillStyle = "black";
@@ -92,6 +95,7 @@ function DrawAmpmeter(mX, mY)
   let connectPlus = mX + (diameter/2); // samma för pluspolen
   return connectPlus, connectMinus;
 }
+
 function DrawConductor(mX, mY, mX2, mY2)
 {
   ctx.moveTo(mX,mY);
@@ -110,7 +114,6 @@ function DrawConductor(mX, mY, mX2, mY2)
 }
 
 
-ctx.lineWidth = 10;
 
 setInterval(Update, 1/60) //update körs nu 60 ggr per sekund
 function Update()
