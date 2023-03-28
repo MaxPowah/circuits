@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="sv-se">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+    <title>Slutprojekt</title>
+</head>
+<body>
+    <header>
+        <p id="p1" draggable="true">Fysik amirite?</p>
+    </header>
+    <article>
+        <div id="left">
+
+        </div>
+        <div id="center">
+            <canvas id="gameScreen" width="700" height="480"></canvas>
+            <script src="script.js"></script>
+        </div>
+        <div id="right">
+            <input type="button" value="Hur fungerar det här?" onclick="explain()">
+            <h2>Elektriska komponenter</h2>
+            <ul>Välj en komponent från listan
+                <label>
+                    <input type="button" value="Batteri" onclick="Draw('battery')">
+                    <img src="" alt="batteri.png">
+                </label>
+                <label >
+                    <input type="button" value="Ledare" onclick="Draw('conductor')">
+                    <img src="" alt="ledare.png">
+                </label>
+                <label>
+                    <input type="button" value="Resistor" onclick="Draw('resist')">
+                    <img src="" alt="resistor.png">
+                </label>
+                <label>
+                    <input type="button" value="Lampa" onclick="Draw('lamp')">
+                    <img src="" alt="lampa.png">
+                </label>
+                <br>
+                <label>
+                    <input type="button" value="Voltmeter" onclick="Draw('voltM')">
+                    <img src="" alt="volt.png">
+                </label>
+                <label>
+                    <input type="button" value="Amperemeter" onclick="Draw('ampM')">
+                    <img src="" alt="amp.png">
+                </label>
+
+            </ul>
+        </div>
+    </article>    
+
+</body>
+</html>

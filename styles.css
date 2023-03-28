@@ -1,0 +1,42 @@
+body {
+    background-image: url("./img/wiring nightmare 007.jpg");
+}
+article{
+    display: flex;
+    flex-direction: row;
+    /*
+    1337 h@x0r matrix!
+    */
+    background-color: rgba(228, 228, 228, 0.504);
+    color: rgb(0, 0, 0);
+    font-size: large;
+}
+ul {
+    justify-content: left;
+    display: flex;
+    flex-direction: column;
+}
+label {
+    display: inline;
+}
+
+p{
+    background-color: aqua;
+}
+
+#gameScreen {
+    background-color: rgb(234, 242, 248);
+    border: 1px solid #000000;
+    color: #000000;
+    justify-content: center;
+}   
+#left {
+    width: 20%;
+}
+#center {
+    width: 60%;
+}
+#right{
+    justify-content: left;
+    width: 20%;
+}
