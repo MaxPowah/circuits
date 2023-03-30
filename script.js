@@ -40,9 +40,13 @@ function Draw(something)
       DrawResistor(mX, mY);
       break;
     case "conductor":
-      DrawConductor(mX, mY);
+      let mX2 = Math.floor(Math.random() * 700);
+      let mY2 = Math.floor(Math.random() * 480);
+      DrawConductor(mX, mY, mX2, mY2);
       break;
     case "lamp":
+      break;
+    case "volt":
       break;
     case "clearAll":
       break;
@@ -86,12 +90,13 @@ function DrawResistor(mX, mY)
 
 function DrawAmpmeter(mX, mY)
 {
+  let amps = "1";
   ctx.fillStyle = "black";
   let diameter = 40;
   ctx.beginPath();
-  ctx.arc(mX, mY, diameter, 0, 2 * Math.PI);
+  ctx.arc(mX, mY, diameter, 0, 2 * Math.PI);//cirkel
   ctx.stroke(); 
-  
+  ctx.fillText(amps + "A", mX, mY, maxWidth);
   let connectMinus = mX - (diameter/2); // platsen vid minuspolen där andra saker kan anslutas
   let connectPlus = mX + (diameter/2); // samma för pluspolen
   return connectPlus, connectMinus;
@@ -99,18 +104,14 @@ function DrawAmpmeter(mX, mY)
 
 function DrawConductor(mX, mY, mX2, mY2)
 {
+  
+  ctx.fillStyle = "black";
   ctx.moveTo(mX,mY);
   ctx.lineTo(mX2,mY2);
-  ctx.fillStyle = "black";
-  //!draw a circle
-
-
-  ctx.fillStyle = "rgb(234, 242, 248)"; // ser till att insidan är samma färg som bakgrunden
-  //!draw same but smaller
-
-
-  let connectMinus = mX - (width/2); // platsen vid minuspolen där andra saker kan anslutas
-  let connectPlus = mX + 30; // samma för pluspolen
+  ctx.lineWidth = 3;
+  ctx.stroke();
+  let connectMinus = (mX,mY); // platsen vid minuspolen där andra saker kan anslutas
+  let connectPlus = (mX2,mY2); // samma för pluspolen
   return connectPlus, connectMinus;
 }
 
@@ -119,12 +120,12 @@ function DrawConductor(mX, mY, mX2, mY2)
 setInterval(Update, 1/60) //update körs nu 60 ggr per sekund
 function Update()
 {
-  Draw("battery");
+  Draw("conductor");
   //getMousePos(c, mouseClo)
 }
 //alert("aaaaaaa");
 
-function explain()
+function Explain()
 {
-  alert("inte fasen vet jag")
+  alert("inte fasen vet jag");
 }
