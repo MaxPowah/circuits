@@ -61,6 +61,7 @@ function DrawBattery(mX, mY) //!can add 3rd arg to change the voltage
   //draw text elements
   let connectMinus = mX - 20; // platsen vid minuspolen där andra saker kan anslutas
   let connectPlus = mX + 30; // samma för pluspolen
+  DrawBattery(mX, mY);
   return connectPlus, connectMinus;
   
 }
@@ -118,6 +119,7 @@ function DrawConductor(mX, mY, mX2, mY2)
 setInterval(Update, 1/60) //update körs nu 60 ggr per sekund
 function Update()
 {
+  Draw("battery");
   //getMousePos(c, mouseClo)
 }
 //alert("aaaaaaa");
