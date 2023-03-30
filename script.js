@@ -37,7 +37,7 @@ function Draw(something)
       DrawBattery(mX, mY);
       break;
     case "resistor":
-      DrawResistor(mX, mY);
+      connections[0,1] = DrawResistor(mX, mY);
       break;
     case "conductor":
       let mX2 = Math.floor(Math.random() * 700);
@@ -104,7 +104,7 @@ function DrawAmpmeter(mX, mY)
 
 function DrawConductor(mX, mY, mX2, mY2)
 {
-  
+  //!man kan nog använda matte här för att få saker att bli snyggare
   ctx.fillStyle = "black";
   ctx.moveTo(mX,mY);
   ctx.lineTo(mX2,mY2);
@@ -120,7 +120,7 @@ function DrawConductor(mX, mY, mX2, mY2)
 setInterval(Update, 1/60) //update körs nu 60 ggr per sekund
 function Update()
 {
-  Draw("conductor");
+  //Draw("conductor");
   //getMousePos(c, mouseClo)
 }
 //alert("aaaaaaa");
