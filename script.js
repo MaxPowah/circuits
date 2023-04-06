@@ -37,7 +37,7 @@ function Draw(something)
       DrawBattery(mX, mY);
       break;
     case "resistor":
-      connections[0,1] = DrawResistor(mX, mY);
+      DrawResistor(mX, mY);
       break;
     case "conductor":
       let mX2 = Math.floor(Math.random() * 700);
@@ -72,9 +72,8 @@ function DrawBattery(mX, mY) //!can add 3rd arg to change the voltage
     
 function DrawResistor(mX, mY)
 {
-  ctx.fillText("Hello World!", mX, mY);
   ctx.fillStyle = "black";
-      
+  
   //jag skulle vilja att den kan roteras
   let width = 90;
   let height = 30;
@@ -82,8 +81,13 @@ function DrawResistor(mX, mY)
   ctx.strokeRect((mX- width/2), mY, width, height);
   let connectMinus = mX - (width/2); // platsen vid minuspolen där andra saker kan anslutas
   let connectPlus = mX + 30; // samma för pluspolen
+  
+  ctx.moveTo(mX-40,mY-20);
+  ctx.fillText("x ohm", mX-35, mY+20);
+  /*
   ctx.fillStyle = "rgb(234, 242, 248)"; // ser till att insidan är samma färg som bakgrunden
   ctx.fillRect((mX- width/2) + insideOffset/2, (mY + insideOffset/2), (width - insideOffset), height - insideOffset);
+  */
   return connectPlus, connectMinus;
   
 }
