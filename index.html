@@ -17,7 +17,7 @@
 
         </div>
         <div id="center">
-            <canvas id="gameScreen" width="700" height="480"></canvas>
+            <canvas id="gameScreen" width="960" height="640"></canvas>
             <script src="script.js"></script>
         </div>
         <div id="right">
@@ -27,7 +27,9 @@
                 <label>
                     <input type="button" value="Batteri" onclick="Draw('battery')">
                     <img src="" alt="batteri.png">
+                    <input type="text" name="Voltage" id="voltage" value="0">
                 </label>
+                
                 <label >
                     <input type="button" value="Ledare" onclick="Draw('conductor')">
                     <img src="" alt="ledare.png">
@@ -35,6 +37,7 @@
                 <label>
                     <input type="button" value="Resistor" onclick="Draw('resistor')">
                     <img src="" alt="resistor.png">
+                    <input type="text" name="resistor" id="resistor" value="0">
                 </label>
                 <label>
                     <input type="button" value="Lampa" onclick="Draw('lamp')">
