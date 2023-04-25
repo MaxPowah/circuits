@@ -58,10 +58,13 @@ function Draw(something)
       DrawConductor();
       break;
     case "lamp":
+      alert("hmm, något gick fel");
       break;
       case "volt":
-      break;
+        alert("hmm, något gick fel");
+        break;
     case "clearAll":
+      location.reload();
       break;
     default:
       alert("hmm, något gick fel");
@@ -161,5 +164,5 @@ function Update()
 
 function Explain()
 {
-  alert("inte fasen vet jag");
+  alert("inte fasen vet jag. Jk, det är ganska lätt. För att placera ut en komponent, gör såhär:\n 1. Klicka på den vita rutan\n 2. Klicka sen på en knapp för vad du vill rita (om du gör ett batteri eller en resistor så får du även skriva in värden. Lämnar du fälten tomma kommer standardvärden att användas) \n3. Den komponenten kommer dyka upp på skärmen.");
 }
