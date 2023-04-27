@@ -5,8 +5,10 @@ ctx.lineWidth = 4;
 ctx.font = "20px Roboto";
 let mousePos = {x: 0, y: 0};
 //report the mouse position on click
-c.addEventListener("click", function (evt) {
+c.addEventListener("click", function (evt) 
+{
   getMousePos(c, evt);
+
 }, false);
 //Get Mouse Position
 function getMousePos(canvas, evt) {
@@ -16,36 +18,38 @@ function getMousePos(canvas, evt) {
   mousePos.x = evt.clientX - rect.left;
   mousePos.y = evt.clientY - rect.top;
 }
-
+let ComponentList = [];
 /*
-let mX;//mouse x pos
-let mY;//mouse y pos
-
-
-function  getMousePos(canvas, evt) { //?fattar inte
-  var rect = canvas.getBoundingClientRect(), // abs. size of element
-  scaleX = canvas.width / rect.width,    // relationship bitmap vs. element for x
-  scaleY = canvas.height / rect.height;  // relationship bitmap vs. element for y
+let margin = 40; // man kan vara 40 pixlar utanför mitten av anslutningspunkten och det fungerar fortfarande
+//för minuspolen
+if (Math.abs(ComponentList.first.connectMinus.x - ComponentList.last.connectMinus.x) < margin && Math.abs(ComponentList.first.connectMinus.y - ComponentList.last.connectMinus.y) < margin)
+{
   
-  return {
-    mX: (evt.clientX - rect.left) * scaleX,   // scale mouse coordinates after they have
-    mY: (evt.clientY - rect.top) * scaleY     // been adjusted to be relative to element
-  }
+}
+else
+{
+  alert("Tyvärr, du får rita upp kretsen igen :<");
+}
+//för pluspolen
+if (Math.abs(ComponentList.first.connectMinus.x - ComponentList.last.connectMinus.x) < margin && Math.abs(ComponentList.first.connectMinus.y - ComponentList.last.connectMinus.y) < margin)
+{
+  
+}
+else
+{
+  alert("Tyvärr, du får rita upp kretsen igen :<");
 }
 */
-let skitenJagValtNu;
+
+
 function Draw(something)
 {
-  skitenJagValtNu = something;
-  /*
-  button is pressed
-  canvas is clicked
-  stuff is drawn
-  */
-  //mX = Math.floor(Math.random() * 960);
+  //för debugging
+  //mX = Math.floor(Math.random() * 960); 
   //mY = Math.floor(Math.random() * 640);
 
-
+  //plan är att ha en lista där saker från den här listan läggs till i ordning. Programmet ska hålla koll på ordningen av vad som placeras och 
+  
   switch(something)
   {
     case "battery":
@@ -55,8 +59,12 @@ function Draw(something)
         DrawResistor(mousePos.x, mousePos.y);
         break;
     case "conductor":
-      DrawConductor();
+      a
+      DrawConductor(mousePos.x, mousePos.y);
       break;
+      case "conductor2":
+        ConductorTwo(mousePos.x, mousePos.y);
+        break;
     case "lamp":
       alert("hmm, något gick fel");
       break;
@@ -72,14 +80,14 @@ function Draw(something)
     }
 }
 
-function DrawBattery(mX, mY) //!can add 3rd arg to change the voltage
+function DrawBattery(mX, mY)
 {
-  let U = document.getElementById("voltage").value;
-  let voltage = U.toString();
-  if(voltage == "" || voltage == "0")
+  let U = document.getElementById("voltage").value; //U används i beräkningar
+  let voltage = U.toString(); // för att enkelt kunna läggas ihop med en string senare
+  if(voltage == null || voltage == 0) // så att man bara kan skriva siffror och att värdet inte blir 0
   {
-    voltage = "12";
-    U = 12; // för beräkningar
+    voltage = "12"; // så att batteriet inte har 0 i spänning
+    U = 12; 
   }
   
   let Uconcat = voltage.concat(" V");
@@ -97,9 +105,9 @@ function DrawBattery(mX, mY) //!can add 3rd arg to change the voltage
     
 function DrawResistor(mX, mY)
 {
-  let R = document.getElementById("resistor").value;
+  let R = document.getElementById("resistor").value; // för beräkningar
   let resistance = R.toString();
-  if(resistance == "" || resistance == "0")
+  if(resistance == null || resistance == 0)
   {
     resistance = "10";
     R = 10; // för beräkningar
@@ -139,17 +147,26 @@ function DrawAmpmeter(mX, mY)
   return connectPlus, connectMinus;
 }
 
-function DrawConductor(mX, mY, mX2, mY2)
+let mX1,mX2; //? för att.
+function DrawConductor(mX, mY) //steg 1
 {
-  //!man kan nog använda matte här för att få saker att bli snyggare
-  ctx.fillStyle = "black";
   ctx.moveTo(mX,mY);
-  ctx.lineTo(mX2,mY2);
-  ctx.lineWidth = 3;
-  ctx.stroke();
+  alert("tryck en gång till!");
+  ctx.fillStyle = "black";
+  mX1  = mX;
+  mY1 = mY;
   let connectMinus = (mX,mY); // platsen vid minuspolen där andra saker kan anslutas
+
+}
+function ConductorTwo(mX2, mY2) //steg 2
+{
+
+  ctx.lineWidth = 3;
+  ctx.lineTo(mX2);
+  ctx.stroke(mY2);
   let connectPlus = (mX2,mY2); // samma för pluspolen
   return connectPlus, connectMinus;
+
 }
 
 
@@ -164,5 +181,5 @@ function Update()
 
 function Explain()
 {
-  alert("inte fasen vet jag. Jk, det är ganska lätt. För att placera ut en komponent, gör såhär:\n 1. Klicka på den vita rutan\n 2. Klicka sen på en knapp för vad du vill rita (om du gör ett batteri eller en resistor så får du även skriva in värden. Lämnar du fälten tomma kommer standardvärden att användas) \n3. Den komponenten kommer dyka upp på skärmen.");
+  alert("inte fasen vet jag ¯|_(ツ)_/¯. \nFör att placera ut en komponent, gör såhär:\n\n 1. Klicka på den vita rutan\n 2. Klicka sen på en knapp för vad du vill rita (om du gör ett batteri eller en resistor så får du även skriva in värden. Lämnar du fälten tomma kommer standardvärden att användas) \n 3. Den klickade komponenten kommer dyka upp på skärmen.");
 }
