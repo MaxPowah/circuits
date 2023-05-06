@@ -1,55 +1,57 @@
 var c = document.getElementById("gameScreen");
 var ctx = c.getContext("2d");
+let margin = 30; // man kan vara så här många pixlar utanför mitten av anslutningspunkten och det fungerar fortfarande
 ctx.fillStyle = "black";
 ctx.lineWidth = 4;
 ctx.font = "20px Roboto";
-let mousePos = {x: 0, y: 0};
 
-//report the mouse position on click
+let ComponentList = []; //lista som alla utplacera komponenter hamnar i
+let circuitComplete = false;
+
+let mousePos = {x: 0, y: 0};
+//lyssnar efter att musknappen trycks ner
 c.addEventListener("click", function (evt) 
 {
-  getMousePos(c, evt);
-  
+  getMousePos(c, evt); // detta utförs vid klick
 }, false);
-//Get Mouse Position
+
 function getMousePos(canvas, evt) {
   var rect = canvas.getBoundingClientRect();//när ett mouse-event sker så tar funktionen reda på hur stor canvasen är
   mousePos.x = evt.clientX - rect.left; //musens x och y-koordinater på canvasen sparas i objektet mousePos
   mousePos.y = evt.clientY - rect.top;
+}
 
-}
-let ComponentList = [];
-/*
-let margin = 40; // man kan vara 40 pixlar utanför mitten av anslutningspunkten och det fungerar fortfarande
-//för minuspolen
-if (Math.abs(ComponentList.first.connectMinus.x - ComponentList.last.connectMinus.x) < margin && Math.abs(ComponentList.first.connectMinus.y - ComponentList.last.connectMinus.y) < margin)
+function ClosedCircuit() 
 {
-  
+  let overlaps = 0; // för att se hur många gånger 
+  for(let i=0; i< ComponentList.length; i++){
+    let comp1 = ComponentList[i];
+    let comp2 = ComponentList[i+1];
+    //för minuspolen
+    if (Math.abs(comp1.x - comp2.x) < margin && Math.abs(comp1.y - comp2.y) < margin)
+    {
+    console.log("yay! their x1y1s overlap!!")
+    }
+    else
+    {
+      alert("Tyvärr, du får rita upp kretsen igen :<");
+    }
+    if (Math.abs(comp1.x - comp2.x) < margin && Math.abs(comp1.y - comp2.y) < margin)
+    {
+      console.log("yay! they overlap!!")
+    }
+    else
+    {
+      alert("Tyvärr, du får rita upp kretsen igen :<");
+    }
+  }
+  if(overlaps == ComponentList.length){
+    circuitComplete = true;
+  }
 }
-else
-{
-  alert("Tyvärr, du får rita upp kretsen igen :<");
-}
-//för pluspolen
-if (Math.abs(ComponentList.first.connectMinus.x - ComponentList.last.connectMinus.x) < margin && Math.abs(ComponentList.first.connectMinus.y - ComponentList.last.connectMinus.y) < margin)
-{
-  
-}
-else
-{
-  alert("Tyvärr, du får rita upp kretsen igen :<");
-}
-*/
-
 
 function Draw(something)
 {
-  //för debugging
-  //mX = Math.floor(Math.random() * 960); 
-  //mY = Math.floor(Math.random() * 640);
-
-  //plan är att ha en lista där saker från den här listan läggs till i ordning. Programmet ska hålla koll på ordningen av vad som placeras och 
-  
   switch(something)
   {
     case "battery":
@@ -79,11 +81,12 @@ function Draw(something)
       break;
     }
 }
-function DrawCircle(mX,mY){
-  ctx.fillStyle = "rgb(219, 214, 220)";
+function DrawCircle(mX,mY) /// tänkt för att man ska kunna se hur stor marginalen är för att placera komponenter
+{
+  ctx.fillStyle = "#d8dfe4";
   ctx.beginPath();
-  ctx.arc(mX, mY, 40, 0, 2 * Math.PI); //cirkel
-  ctx.stroke(); 
+  ctx.arc(mX, mY, margin, 0, 2 * Math.PI); //cirkel med radien margin
+  ctx.fill();
 
 }
 
@@ -143,7 +146,6 @@ function DrawResistor(mX, mY)
     R: R
   }  
   ComponentList.push(r); //lägger till resistor-objektet sist i arrayen av komponenter;  
-
 }
 
 function DrawAmpmeter(mX, mY)
@@ -168,11 +170,10 @@ function DrawAmpmeter(mX, mY)
   ComponentList.push(a);
 }
 
-let mX1,mY1; //? för att.
+let mX1,mY1; // för att conductor2 ska komma ihåg var musen var tidigare
 function DrawConductor(mX, mY) //steg 1
 {
   ctx.moveTo(mX,mY);
-  //alert("tryck en gång till!");
   mX1  = mX;
   mY1 = mY;
   console.log("x"+mX1+ "y"+mY1);
@@ -196,15 +197,7 @@ function ConductorTwo(mX2, mY2) //steg 2
   ComponentList.push(c);
 }
 
-
-
-setInterval(Update, 1/60) //update körs nu 60 ggr per sekund
-function Update()
-{
-}
-
-
 function Explain()
 {
-  alert("¯|_(ツ)_/¯. \nFör att placera ut en komponent, gör såhär:\n\n 1. Klicka på den vita rutan\n 2. Klicka sen på en knapp för vad du vill rita (om du gör ett batteri eller en resistor så får du även skriva in värden. Lämnar du fälten tomma kommer standardvärden att användas) \n 3. Den klickade komponenten kommer dyka upp på skärmen.");
+  alert("För att placera ut en komponent, gör såhär:\n\n 1. Klicka på den vita rutan\n 2. Klicka sen på en knapp för vad du vill rita (om du gör ett batteri eller en resistor så får du även skriva in värden. Lämnar du fälten tomma kommer standardvärden att användas) \n 3. Den klickade komponenten kommer dyka upp på skärmen.");
 }
