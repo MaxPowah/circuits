@@ -21,34 +21,41 @@ function getMousePos(canvas, evt) {
   mousePos.y = evt.clientY - rect.top;
 }
 
-function ClosedCircuit() 
+function CloseCircuit() 
 {
+  console.log("testar att sluta kretsen")
   let overlaps = 0; // för att se hur många gånger 
+  let comp1, comp2;
   for(let i=0; i< ComponentList.length; i++){
     let comp1 = ComponentList[i];
     let comp2 = ComponentList[i+1];
     //för minuspolen
-    if (Math.abs(comp1.x - comp2.x) < margin && Math.abs(comp1.y - comp2.y) < margin)
-    {
-    console.log("yay! their x1y1s overlap!!")
+    Overlaps(comp1, comp2);
+    
+    if(overlaps == ComponentList.length){
+      circuitComplete = true;
+      alert("omg it works!!!!!");
     }
-    else
-    {
-      alert("Tyvärr, du får rita upp kretsen igen :<");
-    }
-    if (Math.abs(comp1.x - comp2.x) < margin && Math.abs(comp1.y - comp2.y) < margin)
-    {
-      console.log("yay! they overlap!!")
-    }
-    else
-    {
-      alert("Tyvärr, du får rita upp kretsen igen :<");
-    }
-  }
-  if(overlaps == ComponentList.length){
-    circuitComplete = true;
   }
 }
+function Overlaps(comp1, comp2) 
+{
+  if (Math.abs(comp1.x - comp2.x) < margin && Math.abs(comp1.y - comp2.y) < margin)
+    {
+      console.log("yay! the x1s overlap for " +comp1 + "and" + comp2);
+      return true;
+    }
+    else if (Math.abs(comp1.x - comp2.x) < margin && Math.abs(comp1.y - comp2.y) < margin)
+    {
+      console.log("yay! the y1s overlap for " +comp1 + "and " + comp2);
+    }
+    else
+    {
+      alert("Tyvärr, du får rita upp kretsen igen (tryck ctrl+r för att böra om) :< \n Du kan också försöka koppla ihop kretsen genom att lägga till ledningar mellan komponenter");
+      return false;
+
+    }
+  }
 
 function Draw(something)
 {
@@ -159,13 +166,14 @@ function DrawAmpmeter(mX, mY)
   ctx.fillText(amps + "A", mX, mY, maxWidth);
   let connectMinus = mX - (diameter/2); // platsen vid minuspolen där andra saker kan anslutas
   let connectPlus = mX + (diameter/2); // samma för pluspolen
+  alert("diameter" + diameter);
   let a = {
     type: "a",
-    x:mX - (diameter/2), 
+    x: mX - (diameter/2), 
     y: mY, 
-    x2:mX + 30, 
+    x2:mX + (diameter/2), 
     y2: mY, 
-    A: A
+    I: I
   }  
   ComponentList.push(a);
 }
@@ -189,8 +197,8 @@ function ConductorTwo(mX2, mY2) //steg 2
   console.log("x"+mX1 + "y"+mY1+"    x2"+mX2 + "y2"+mY2);
   let c = {
     type:"c",
-    x:mX - (diameter/2), 
-    y: mY, 
+    x:mX1 - (diameter/2), 
+    y: mY1, 
     x2:mX2, 
     y2: mY2, 
   }  
