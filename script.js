@@ -1,8 +1,9 @@
 var c = document.getElementById("gameScreen");
 var ctx = c.getContext("2d");
-let margin = 30; // man kan vara så här många pixlar utanför mitten av anslutningspunkten och det fungerar fortfarande
+let margin = 15; // man kan vara så här många pixlar utanför mitten av anslutningspunkten och det fungerar fortfarande
 ctx.fillStyle = "black";
 ctx.lineWidth = 4;
+ctx.strokeStyle
 ctx.font = "20px Roboto";
 
 let ComponentList = []; //lista som alla utplacera komponenter hamnar i
@@ -106,7 +107,20 @@ function DrawBattery(mX, mY)
     voltage = "12"; // så att batteriet inte har 0 i spänning
     U = 12; 
   }
+  let b = {
+    type:"b",
+    x:mX - 15, 
+    y: mY + 13, 
+    x2:mX + 22, 
+    y2: mY + 13, 
+    U: U
+  }
+  ComponentList.push(b); //lägger till batteri-objektet sist i arrayen av komponenter;  
   
+  //cirklar för att man ska kunna se var man får ansluta 
+  DrawCircle(b.x,b.y);
+  DrawCircle(b.x2,b.y2);
+  //visuals för självakomponenten
   let Uconcat = voltage.concat(" V");
   ctx.fillStyle = "black";
   ctx.fillRect(mX - 10, mY, 6, 30);
@@ -114,19 +128,12 @@ function DrawBattery(mX, mY)
   //draw text elements
   ctx.fillText(Uconcat, mX-20, mY - 20);
   
-  let b = {
-    type:"b",
-    x:mX - 20, 
-    y: mY, 
-    x2:mX + 30, 
-    y2: mY, 
-    U: U
-  }
-  ComponentList.push(b); //lägger till batteri-objektet sist i arrayen av komponenter;  
 }
     
 function DrawResistor(mX, mY)
 {
+  let width = 90;
+  let height = 30;
   let R = document.getElementById("resistor").value; // för beräkningar
   let resistance = R.toString();
   if(resistance == null || resistance == 0)
@@ -135,38 +142,31 @@ function DrawResistor(mX, mY)
     R = 10; // för beräkningar
   }
   let Rconcat = resistance.concat(" Ω");
-  ctx.fillStyle = "black";
-  
-  //jag skulle vilja att den kan roteras
-  let width = 90;
-  let height = 30;
-  ctx.strokeRect((mX- width/2), mY, width, height);  
-  ctx.moveTo(mX-40,mY-20);
-  ctx.fillText(Rconcat, mX-35, mY+20);
-
   let r = {
     type:"r",
     x:mX - (width/2), 
     y: mY, 
-    x2:mX + 30, 
+    x2:mX + 45, 
     y2: mY, 
     R: R
   }  
   ComponentList.push(r); //lägger till resistor-objektet sist i arrayen av komponenter;  
+  
+  //cirklar för att man ska kunna se var man får ansluta sladdar
+  DrawCircle(r.x,r.y);
+  DrawCircle(r.x2,r.y2);
+
+  //visuals för själva komponenten  
+  ctx.fillStyle = "black";
+  ctx.strokeRect((mX- width/2), mY-height/2, width, height);  
+  //ctx.moveTo(mX-40,mY-height/2 - 20);
+  ctx.fillText(Rconcat, mX-35, mY + 6);
+
 }
 
 function DrawAmpmeter(mX, mY)
 {
-  let amps = "1";
-  ctx.fillStyle = "black";
-  let diameter = 40;
-  ctx.beginPath();
-  ctx.arc(mX, mY, diameter, 0, 2 * Math.PI);//cirkel
-  ctx.stroke(); 
-  ctx.fillText(amps + "A", mX, mY, maxWidth);
-  let connectMinus = mX - (diameter/2); // platsen vid minuspolen där andra saker kan anslutas
-  let connectPlus = mX + (diameter/2); // samma för pluspolen
-  alert("diameter" + diameter);
+  let I = "1"; // placeholder-kod
   let a = {
     type: "a",
     x: mX - (diameter/2), 
@@ -176,6 +176,17 @@ function DrawAmpmeter(mX, mY)
     I: I
   }  
   ComponentList.push(a);
+  
+  //cirklar för att man ska kunna se var man får ansluta 
+  //visuals för själva komponenten  
+  ctx.fillStyle = "black";
+  let diameter = 40;
+  ctx.beginPath();
+  ctx.arc(mX, mY, diameter, 0, 2 * Math.PI);//cirkel
+  ctx.stroke(); 
+  ctx.fillText(amps + "A", mX, mY, maxWidth);
+  let connectMinus = mX - (diameter/2); // platsen vid minuspolen där andra saker kan anslutas
+  let connectPlus = mX + (diameter/2); // samma för pluspolen
 }
 
 let mX1,mY1; // för att conductor2 ska komma ihåg var musen var tidigare
@@ -191,13 +202,14 @@ function ConductorTwo(mX2, mY2) //steg 2
   ctx.fillStyle = "black";
   ctx.lineWidth = 3;
   ctx.lineTo(mX2,mY2);
+  //ctx.beginPath();
   ctx.stroke();
   let connectPlus = (mX2,mY2); // samma för pluspolen
   let connectMinus = (mX2,mY2); // samma för pluspolen
   console.log("x"+mX1 + "y"+mY1+"    x2"+mX2 + "y2"+mY2);
   let c = {
     type:"c",
-    x:mX1 - (diameter/2), 
+    x:mX1, 
     y: mY1, 
     x2:mX2, 
     y2: mY2, 
@@ -208,4 +220,6 @@ function ConductorTwo(mX2, mY2) //steg 2
 function Explain()
 {
   alert("För att placera ut en komponent, gör såhär:\n\n 1. Klicka på den vita rutan\n 2. Klicka sen på en knapp för vad du vill rita (om du gör ett batteri eller en resistor så får du även skriva in värden. Lämnar du fälten tomma kommer standardvärden att användas) \n 3. Den klickade komponenten kommer dyka upp på skärmen.");
+  alert("Om du vill ");
+
 }
