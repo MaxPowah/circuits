@@ -26,38 +26,39 @@
             <br>
             <input type="button" value="Slut kretsen" onclick="CloseCircuit()">
             <h2>Elektriska komponenter</h2>
+            <p>
+                Välj en komponent från listan
+            </p>
             <ul>
-                <h4>
-                    Välj en komponent från listan
-                </h4>
-                <input type="button" value="Batteri" onclick="Draw('battery')">
+                
                 <label>
+                    <input type="button" value="Batteri" onclick="Draw('battery')">
                     <input type="number" name="Voltage" id="voltage" value="0">
-                    </label>
-                    <br>
-                    <label>
-                        <input type="button" value="Ledare" onclick="Draw('conductor')">
-                    </label>
-                    <br>
-                    <label>
-                        <input type="button" value="Ledare 2" onclick="Draw('conductor2')">
-                    </label>
-                    <br>
-                    <label>
-                        <input type="button" value="Resistor" onclick="Draw('resistor')">
-                        <input type="number" name="resistor" id="resistor" value="0">
-                    </label>
-                    <br>
-                    <label>
-                        <input type="button" value="Lampa" onclick="Draw('lamp')">
-                    </label>
-                    <br><br>
-                    <label>
-                        <input type="button" value="Rensa skärmen" onclick="Draw('clearAll')">
-                    </label>
-                </ul>
-            </div>
-        </article>
+                </label>
+                <br>
+                <label>
+                    <input type="button" value="Ledare" onclick="Draw('conductor')">
+                </label>
+                <br>
+                <label>
+                    <input type="button" value="Ledare 2" onclick="Draw('conductor2')">
+                </label>
+                <br>
+                <label>
+                    <input type="button" value="Resistor" onclick="Draw('resistor')">
+                    <input type="number" name="resistor" id="resistor" value="0">
+                </label>
+                <br>
+                <label>
+                    <input type="button" value="Lampa" onclick="Draw('lamp')">
+                </label>
+                <br><br>
+                <label>
+                    <input type="button" value="Rensa skärmen" onclick="Draw('clearAll')">
+                </label>
+            </ul>
+        </div>
+    </article>
         
     </body>
     </html>
