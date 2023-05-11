@@ -10,13 +10,19 @@
 </head>
 <body>
     <header>
-        <p id="p1">Fysik amirite?</p>
+        <div id="p1">
+        <p >Circuit Paint</p>
+        <button onclick="Close()">
+            <img src="./img/win95icons.webp" alt="buttons" id="fakeWindows">
+        </button>
+        </div>
+        
     </header>
     <article>
         <div id="left">
-
+                <br>
         </div>
-        <div id="center">
+        <div id="window">
             <canvas id="gameScreen" width="960" height="640"></canvas>
             <script src="script.js"></script>
         </div>
@@ -48,22 +54,11 @@
                 </label>
                 <br>
                 <label>
-                    <input type="button" value="Voltmeter" onclick="Draw('volt')">
-                    <img src="" alt="volt.png">
-                </label>
-                <label>
-                    <input type="button" value="Amperemeter" onclick="Draw('ampM')">
-                    <img src="" alt="amp.png">
-                </label>
-                <label>
                     <input type="button" value="Rensa skärmen" onclick="Draw('clearAll')">
                     <img src="" alt="amp.png">
                 </label>
-
-
             </ul>
         </div>
     </article>    
-
 </body>
 </html>

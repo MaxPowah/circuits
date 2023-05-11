@@ -40,6 +40,7 @@ function CloseCircuit()
     circuitComplete = true;
     alert("omg it works!!!!!");
   }
+  LetThereBeLight();
 }
 function Overlap(comp1, comp2) 
 {
@@ -56,7 +57,6 @@ function Overlap(comp1, comp2)
     {
       alert("Tyvärr, du får rita upp kretsen igen (tryck ctrl+r för att böra om) :< \n Du kan också försöka koppla ihop kretsen genom att lägga till ledningar mellan komponenter");
       return false;
-
     }
   }
 
@@ -93,6 +93,7 @@ function Draw(something)
 }
 function DrawCircle(mX,mY) /// tänkt för att man ska kunna se hur stor marginalen är för att placera komponenter
 {
+  /*
   ctx.strokeStyle = "#d8dfe4";
   ctx.fillStyle = "#d8dfe4";
   ctx.beginPath();
@@ -100,7 +101,8 @@ function DrawCircle(mX,mY) /// tänkt för att man ska kunna se hur stor margina
   ctx.stroke();
   ctx.fill();
   ctx.strokeStyle = "black";
-
+  
+  */
 
 
 }
@@ -171,17 +173,27 @@ function DrawResistor(mX, mY)
 
 }
 
-function DrawAmpmeter(mX, mY)
+function DrawLamp(mX, mY)
 {
-  let I = "1"; // placeholder-kod
+  let R = document.getElementById("resistor").value; // för beräkningar
+  let resistance = R.toString();
+
+  if(resistance == null || resistance == 0)
+  {
+    resistance = "10";
+    R = 10; // för beräkningar
+  }
+
   let a = {
-    type: "a",
+    type: "l",
     x: mX - (diameter/2), 
     y: mY, 
     x2:mX + (diameter/2), 
     y2: mY, 
-    I: I
+    R: R
   }  
+  let Rconcat = resistance.concat(" Ω");
+
   ComponentList.push(a);
   
   //cirklar för att man ska kunna se var man får ansluta 
@@ -191,6 +203,7 @@ function DrawAmpmeter(mX, mY)
   ctx.beginPath();
   ctx.arc(mX, mY, diameter, 0, 2 * Math.PI);//cirkel
   ctx.stroke(); 
+  ctx.closePath();
   ctx.fillText(amps + "A", mX, mY, maxWidth);
   let connectMinus = mX - (diameter/2); // platsen vid minuspolen där andra saker kan anslutas
   let connectPlus = mX + (diameter/2); // samma för pluspolen
@@ -226,7 +239,13 @@ function ConductorTwo(mX2, mY2) //steg 2
 
 function Explain()
 {
-  alert("För att placera ut en komponent, gör såhär:\n\n 1. Klicka på den vita rutan\n 2. Klicka sen på en knapp för vad du vill rita (om du gör ett batteri eller en resistor så får du även skriva in värden. Lämnar du fälten tomma kommer standardvärden att användas) \n 3. Den klickade komponenten kommer dyka upp på skärmen.");
-  alert("Att placera ut ledare rekommenderar jag att spara till sist. \nDu gör såhär: \n 1. Klicka på den vita rutan där du vill att ledaren ska börja.\n 2. Tryck på knappen 'Ledare'. \n 3. Klicka en gång till på det vita.\n 4. Tryck sen på 'Ledare 2'-knappen. \n \n Vill du göra två ledare i rad så kan du göra steg 3 och sen 4.");
-
+  let msg1 = "För att placera ut en komponent, gör såhär:\n\n 1. Klicka på den vita rutan\n 2. Klicka sen på en knapp för vad du vill rita (om du gör ett batteri eller en resistor så får du även skriva in värden. Lämnar du fälten tomma kommer standardvärden att användas) \n 3. Den klickade komponenten kommer dyka upp på skärmen.";
+  let msg2 = "Att placera ut ledare rekommenderar jag att spara till sist. \nDu gör såhär: \n 1. Klicka på den vita rutan där du vill att ledaren ska börja.\n 2. Tryck på knappen 'Ledare'. \n 3. Klicka en gång till på det vita.\n 4. Tryck sen på 'Ledare 2'-knappen. \n \n Vill du göra två ledare i rad så kan du göra steg 3 och sen 4.";
+  alert(msg1);
+  alert(msg2 + "\n P.S. Detta finns att läsa i console.log också");
+  console.log(msg1 + "\n" + msg2);
+}
+function Close() //för att imitera att man stänger ett fönster i windows
+{
+  window.close();
 }
