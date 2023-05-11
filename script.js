@@ -3,7 +3,7 @@ var ctx = c.getContext("2d");
 let margin = 15; // man kan vara så här många pixlar utanför mitten av anslutningspunkten och det fungerar fortfarande
 ctx.fillStyle = "black";
 ctx.lineWidth = 4;
-ctx.strokeStyle
+ctx.strokeStyle = "black";
 ctx.font = "20px Roboto";
 
 let ComponentList = []; //lista som alla utplacera komponenter hamnar i
@@ -22,24 +22,26 @@ function getMousePos(canvas, evt) {
   mousePos.y = evt.clientY - rect.top;
 }
 
+let overlaps = 0; // för att se hur många gånger 
 function CloseCircuit() 
 {
-  console.log("testar att sluta kretsen")
-  let overlaps = 0; // för att se hur många gånger 
+  console.log("testar att sluta kretsen");
   let comp1, comp2;
   for(let i=0; i< ComponentList.length; i++){
     let comp1 = ComponentList[i];
     let comp2 = ComponentList[i+1];
     //för minuspolen
-    Overlaps(comp1, comp2);
-    
-    if(overlaps == ComponentList.length){
-      circuitComplete = true;
-      alert("omg it works!!!!!");
+    if(Overlap(comp1, comp2)){
+      overlaps++;
     }
   }
+    
+  if(overlaps == ComponentList.length){
+    circuitComplete = true;
+    alert("omg it works!!!!!");
+  }
 }
-function Overlaps(comp1, comp2) 
+function Overlap(comp1, comp2) 
 {
   if (Math.abs(comp1.x - comp2.x) < margin && Math.abs(comp1.y - comp2.y) < margin)
     {
@@ -91,10 +93,15 @@ function Draw(something)
 }
 function DrawCircle(mX,mY) /// tänkt för att man ska kunna se hur stor marginalen är för att placera komponenter
 {
+  ctx.strokeStyle = "#d8dfe4";
   ctx.fillStyle = "#d8dfe4";
   ctx.beginPath();
   ctx.arc(mX, mY, margin, 0, 2 * Math.PI); //cirkel med radien margin
+  ctx.stroke();
   ctx.fill();
+  ctx.strokeStyle = "black";
+
+
 
 }
 
@@ -220,6 +227,6 @@ function ConductorTwo(mX2, mY2) //steg 2
 function Explain()
 {
   alert("För att placera ut en komponent, gör såhär:\n\n 1. Klicka på den vita rutan\n 2. Klicka sen på en knapp för vad du vill rita (om du gör ett batteri eller en resistor så får du även skriva in värden. Lämnar du fälten tomma kommer standardvärden att användas) \n 3. Den klickade komponenten kommer dyka upp på skärmen.");
-  alert("Om du vill ");
+  alert("Att placera ut ledare rekommenderar jag att spara till sist. \nDu gör såhär: \n 1. Klicka på den vita rutan där du vill att ledaren ska börja.\n 2. Tryck på knappen 'Ledare'. \n 3. Klicka en gång till på det vita.\n 4. Tryck sen på 'Ledare 2'-knappen. \n \n Vill du göra två ledare i rad så kan du göra steg 3 och sen 4.");
 
 }
