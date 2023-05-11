@@ -62,14 +62,14 @@ button {
     background-color: transparent;
     border: none;
 }
-#fakeWindows{
+#fakeWindowsButtons{
     margin-top: 0rem;
     max-width: 8rem;
     max-height: 8rem;
     margin-bottom: .7rem;
     margin-right: .4rem;
 }
-#fakeWindows:hover{
+#fakeWindowsButtons:hover{
     filter:opacity(0.8)
 }
 

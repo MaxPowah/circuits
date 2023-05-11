@@ -10,7 +10,7 @@ let ComponentList = []; //lista som alla utplacera komponenter hamnar i
 let circuitComplete = false;
 
 let mousePos = {x: 0, y: 0};
-//lyssnar efter att musknappen trycks ner
+//lyssnar efter att musknappen trycks ner, click är ett musrelaterat event
 c.addEventListener("click", function (evt) 
 {
   getMousePos(c, evt); // detta utförs vid klick

@@ -4,57 +4,61 @@
         <meta charset="UTF-8">
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="script.js"></script>
-    <link rel="stylesheet" href="styles.css">
-    <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
-    <title>Slutprojekt</title>
-</head>
-<body>
-    
-    <header>
+        <link rel="stylesheet" href="styles.css">
+        <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
+        <title>Slutprojekt</title>
+    </head>
+    <body>
+        
+        <header>
         <div id="p1">
             <p >Circuit Paint</p>
             <button onclick="Close()">
-                <img src="./img/win95icons.webp" alt="buttons" id="fakeWindows">
+                <img src="./img/win95icons.webp" alt="buttons" id="fakeWindowsButtons">
             </button>
         </div>
     </header>
     <article id="window">
-            <canvas id="gameScreen" width="960" height="640"></canvas>
-            
-            <div id="options">
-                <h2>Elektriska komponenter</h2>
-                <input type="button" value="Hur fungerar det här?" onclick="Explain()">
-                <br>
-                <input type="button" value="Slut kretsen" onclick="CloseCircuit()">
-                <ul>
-                    <h4>
-                        Välj en komponent från listan
-                    </h4>
-                    <input type="button" value="Batteri" onclick="Draw('battery')">
-                    <label>
-                        <input type="number" name="Voltage" id="voltage" value="0">
+        <canvas id="gameScreen" width="960" height="640"></canvas>
+        
+        <div id="options">
+            <input type="button" value="Hur fungerar det här?" onclick="Explain()">
+            <br>
+            <input type="button" value="Slut kretsen" onclick="CloseCircuit()">
+            <h2>Elektriska komponenter</h2>
+            <ul>
+                <h4>
+                    Välj en komponent från listan
+                </h4>
+                <input type="button" value="Batteri" onclick="Draw('battery')">
+                <label>
+                    <input type="number" name="Voltage" id="voltage" value="0">
                     </label>
+                    <br>
                     <label>
                         <input type="button" value="Ledare" onclick="Draw('conductor')">
                     </label>
+                    <br>
                     <label>
                         <input type="button" value="Ledare 2" onclick="Draw('conductor2')">
                     </label>
+                    <br>
                     <label>
                         <input type="button" value="Resistor" onclick="Draw('resistor')">
                         <input type="number" name="resistor" id="resistor" value="0">
                     </label>
+                    <br>
                     <label>
                         <input type="button" value="Lampa" onclick="Draw('lamp')">
                     </label>
-                    <br>
+                    <br><br>
                     <label>
                         <input type="button" value="Rensa skärmen" onclick="Draw('clearAll')">
                     </label>
                 </ul>
             </div>
         </article>
-    
+        
     </body>
     </html>
+    <script src="script.js"></script>
