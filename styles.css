@@ -123,6 +123,7 @@ input[type="button"] {
     background-color: #c0c0c0;
     border: 8px;
     font-size: 14px;
+    font-family: Windows-95;
     color: black;
     text-align: center;
     text-decoration: none;
@@ -146,6 +147,7 @@ width: 3rem;
 border: 2px solid #c0c0c0;
 background-color: #ffffff;
 font-size: 14px;
+font-family: Windows-95;
 color: #000000;
 text-align: left;
 margin-bottom: 9px;
