@@ -7,13 +7,17 @@
 body {
     font-family: Windows-95;
     background-color: #017e7d;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
-article{
+article{    
     display: flex;
     flex-direction: row;
-    background-color: rgba(228, 228, 228, 0.504);
+    width: 80vw;
     color: rgb(0, 0, 0);
     font-size: large;
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.589);
 }
 ul {
     justify-content: left;
@@ -25,6 +29,7 @@ label {
 }
 
 header{
+    position: relative;
     background-color: #e9e9e7;
     padding-left: 0.6rem;
     padding-right: 0.6rem;
@@ -69,18 +74,32 @@ button {
 }
 
 #gameScreen {
+    position: relative;
     background-color: rgb(234, 242, 248);
-    border: 1px solid #000000;
+    border: 4px solid #c0c0c0;
+    border-radius: .1px;
     color: #000000;
     justify-content: center;
 }   
 #left {
     width: 20vw;
+    padding-right: 20vw;
 }
 #window {
+
+    position: relative;
+    margin-left: 20vw;
+    margin-right: 20vw;
     width: 80vw;
+    display: flex;
+    border: 1rem;
+
 }
 #options {
+    width: 10vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: left;
     background-color: #c0c0c0;
 }
 #right{
@@ -93,10 +112,9 @@ input[type="button"] {
     margin-top: 6px;
     margin-bottom: 6px;
     background-color: #c0c0c0;
-    font-family: Windows-95;
     border: 8px;
     font-size: 14px;
-    color: #000000;
+    color: black;
     text-align: center;
     text-decoration: none;
     box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.589);
@@ -113,8 +131,9 @@ box-shadow: none;
 transform: translateY(1px);
 }
 
-input[type="text"] {
+input[type="number"] {
 padding: 5px;
+width: 3rem;
 border: 2px solid #c0c0c0;
 background-color: #ffffff;
 font-size: 14px;
@@ -125,7 +144,7 @@ box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.589);
 transition: border-color 0.3s, box-shadow 0.3s;
 }
 
-input[type="text"]:focus {
+input[type="number"]:focus {
 outline: none;
 border-color: #2679c9;
 box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.3), inset 0 0 2px rgba(0, 0, 0, 0.3);
