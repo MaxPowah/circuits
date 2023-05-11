@@ -1,8 +1,7 @@
 /* Jag vill ha en windows-95-känsla på sidan*/
 @font-face { 
     font-family: "Windows-95";
-    src: local("W95FA"),
-      url("./font/W95FA.otf") format("opentype")
+    src: url("../circuits/font/W95FA.otf") format("opentype");
 }
 
 body {
