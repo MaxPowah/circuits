@@ -78,8 +78,8 @@ function Draw(something)
 
       break;
     case "lamp":
-      alert("hmm, något gick fel");
-      break;
+      DrawLamp(mousePos.x, mousePos.y);
+    break;
       case "volt":
         alert("hmm, något gick fel");
         break;
@@ -175,16 +175,16 @@ function DrawResistor(mX, mY)
 
 function DrawLamp(mX, mY)
 {
-  let R = document.getElementById("resistor").value; // för beräkningar
+  let R = document.getElementById("lamp").value; // för beräkningar
   let resistance = R.toString();
-
   if(resistance == null || resistance == 0)
   {
     resistance = "10";
     R = 10; // för beräkningar
   }
+  alert("here");
 
-  let a = {
+  let l = {
     type: "l",
     x: mX - (diameter/2), 
     y: mY, 
@@ -194,19 +194,15 @@ function DrawLamp(mX, mY)
   }  
   let Rconcat = resistance.concat(" Ω");
 
-  ComponentList.push(a);
-  
+  ComponentList.push(l);
   //cirklar för att man ska kunna se var man får ansluta 
+
   //visuals för själva komponenten  
-  ctx.fillStyle = "black";
+  ctx.strokeStyle = "black";
   let diameter = 40;
-  ctx.beginPath();
-  ctx.arc(mX, mY, diameter, 0, 2 * Math.PI);//cirkel
-  ctx.stroke(); 
-  ctx.closePath();
   ctx.fillText(amps + "A", mX, mY, maxWidth);
-  let connectMinus = mX - (diameter/2); // platsen vid minuspolen där andra saker kan anslutas
-  let connectPlus = mX + (diameter/2); // samma för pluspolen
+  ctx.arc(mX, mY, diameter, 0, 2 * Math.PI); //cirkel med radien "diameter"
+  ctx.stroke();
 }
 
 let mX1,mY1; // för att conductor2 ska komma ihåg var musen var tidigare
