@@ -27,24 +27,24 @@ function CloseCircuit()
 {
   console.log("testar att sluta kretsen");
   let comp1, comp2;
-  for(let i=0; i< ComponentList.length; i++){
+  for(let i=0; i< ComponentList.length; i++){ //tanken här var att jämföra koordinaterna av alla komponenter med varandra
     let comp1 = ComponentList[i];
     let comp2 = ComponentList[i+1];
     //för minuspolen
-    if(Overlap(comp1, comp2)){
-      overlaps++;
+    if(Overlap(comp1, comp2)){ //om de överlappar måste det betyda att ström kan gå mellan komponenterna
+      overlaps++; 
     }
   }
     
-  if(overlaps == ComponentList.length){
+  if(overlaps == ComponentList.length){ // om var enda komponent överlappar med andra komponenter så måste ju kretsen vara sluten
     circuitComplete = true;
     alert("omg it works!!!!!");
   }
-  LetThereBeLight();
+  LetThereBeLight(); // ska få eventuella lampor att lysa när allt är klart. Lampor som lyser ska få en gul cirkel ritade på sig
 }
-function Overlap(comp1, comp2) 
+function Overlap(comp1, comp2)  //inte färdigt
 {
-  if (Math.abs(comp1.x - comp2.x) < margin && Math.abs(comp1.y - comp2.y) < margin)
+  if (Math.abs(comp1.x - comp2.x) < margin && Math.abs(comp1.y - comp2.y) < margin) //om de två punkterna är inom avståndet "margin" ifrån varandra så kan de anslutas
     {
       console.log("yay! the x1s overlap for " +comp1 + "and" + comp2);
       return true;
@@ -91,21 +91,6 @@ function Draw(something)
       break;
     }
 }
-function DrawCircle(mX,mY) /// tänkt för att man ska kunna se hur stor marginalen är för att placera komponenter
-{
-  /*
-  ctx.strokeStyle = "#d8dfe4";
-  ctx.fillStyle = "#d8dfe4";
-  ctx.beginPath();
-  ctx.arc(mX, mY, margin, 0, 2 * Math.PI); //cirkel med radien margin
-  ctx.stroke();
-  ctx.fill();
-  ctx.strokeStyle = "black";
-  
-  */
-
-
-}
 
 function DrawBattery(mX, mY)
 {
@@ -126,9 +111,6 @@ function DrawBattery(mX, mY)
   }
   ComponentList.push(b); //lägger till batteri-objektet sist i arrayen av komponenter;  
   
-  //cirklar för att man ska kunna se var man får ansluta 
-  DrawCircle(b.x,b.y);
-  DrawCircle(b.x2,b.y2);
   //visuals för självakomponenten
   let Uconcat = voltage.concat(" V");
   ctx.fillStyle = "black";
@@ -161,10 +143,6 @@ function DrawResistor(mX, mY)
   }  
   ComponentList.push(r); //lägger till resistor-objektet sist i arrayen av komponenter;  
   
-  //cirklar för att man ska kunna se var man får ansluta sladdar
-  DrawCircle(r.x,r.y);
-  DrawCircle(r.x2,r.y2);
-
   //visuals för själva komponenten  
   ctx.fillStyle = "black";
   ctx.strokeRect((mX- width/2), mY-height/2, width, height);  
@@ -175,15 +153,15 @@ function DrawResistor(mX, mY)
 
 function DrawLamp(mX, mY)
 {
+  let diameter = 26;
   let R = document.getElementById("lamp").value; // för beräkningar
   let resistance = R.toString();
   if(resistance == null || resistance == 0)
   {
-    resistance = "10";
-    R = 10; // för beräkningar
+    resistance = "20";
+    R = 20; // för beräkningar
   }
-  alert("here");
-
+  
   let l = {
     type: "l",
     x: mX - (diameter/2), 
@@ -193,16 +171,24 @@ function DrawLamp(mX, mY)
     R: R
   }  
   let Rconcat = resistance.concat(" Ω");
-
   ComponentList.push(l);
-  //cirklar för att man ska kunna se var man får ansluta 
-
+  
   //visuals för själva komponenten  
   ctx.strokeStyle = "black";
-  let diameter = 40;
-  ctx.fillText(amps + "A", mX, mY, maxWidth);
-  ctx.arc(mX, mY, diameter, 0, 2 * Math.PI); //cirkel med radien "diameter"
+  ctx.fillStyle = "black";
+  ctx.beginPath();
+  // Draw the circle
+  ctx.arc(mX, mY, diameter, 0, 2 * Math.PI);
+  // Fill the circle with the black color
   ctx.stroke();
+  ctx.closePath();
+  ctx.moveTo(mX-18, mY-18);
+  ctx.lineTo(mX+18, mY+18);
+  ctx.stroke();
+  ctx.moveTo(mX-18, mY+18);
+  ctx.lineTo(mX+18, mY-18);
+  ctx.stroke();
+  ctx.fillText(Rconcat, mX - diameter, mY + 45);
 }
 
 let mX1,mY1; // för att conductor2 ska komma ihåg var musen var tidigare

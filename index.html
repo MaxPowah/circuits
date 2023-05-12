@@ -6,7 +6,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <link rel="stylesheet" href="styles.css">
         <link rel="shortcut icon" href="./img/favicon.ico" type="image/x-icon">
-        <title>Slutprojekt</title>
+        <title>Circuit Paint - Max Slutprojekt</title>
     </head>
     <body>
         
@@ -20,14 +20,13 @@
     </header>
     <article id="window">
         <canvas id="gameScreen" width="960" height="640"></canvas>
-        
         <div id="options">
-            <input type="button" value="Hur fungerar det här?" onclick="Explain()">
+            <input type="button" value="Hur fungerar det här?" onclick="Explain()" id="help">
             <br>
-            <input type="button" value="Slut kretsen" onclick="CloseCircuit()">
+            <input type="button" value="Slut kretsen" onclick="CloseCircuit()" id="close">
             <h2>Elektriska komponenter</h2>
             <p>
-                Välj en komponent från listan
+                Tryck först på den vita rutan, välj sen en komponent från listan
             </p>
             <ul>
                 
@@ -56,7 +55,7 @@
 
                 <br><br>
                 <label>
-                    <input type="button" value="Rensa skärmen" onclick="Draw('clearAll')">
+                    <input type="button" value="Rensa skärmen" onclick="Draw('clearAll')" id="clear">
                 </label>
             </ul>
         </div>

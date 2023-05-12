@@ -102,6 +102,16 @@ button {
     justify-content: left;
     background-color: #c0c0c0;
 }
+#clear {
+    background-color: #c98080;
+}
+#help {
+    background-color: #97c980;
+}
+#close {
+    background-color: #8091c9;
+}
+
 ul {
     padding-left: 0;
 }
